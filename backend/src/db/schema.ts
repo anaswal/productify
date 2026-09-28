@@ -24,7 +24,7 @@ export const products = pgTable("products", {
     updateAt: timestamp("updated_at", {mode:"date"}).notNull().defaultNow(),
 });
 
-export const comments = pgTable("user",{
+export const comments = pgTable("comments",{
     id: uuid("id").defaultRandom().primaryKey(),
     comment: text("comment").notNull(),
     userId: text("user_id")
@@ -32,7 +32,7 @@ export const comments = pgTable("user",{
         .references(() => users.id, {
             onDelete: "cascade"
         }),
-    productId: text("product_id")
+    productId: uuid("product_id")
         .notNull()
         .references(() => products.id, {
             onDelete: "cascade"
